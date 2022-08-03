@@ -9,18 +9,21 @@
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: '',
+  name: "",
   components: {
     Header,
-    Footer
-  }
-}
+    Footer,
+  },
+  mounted() {
+    // 派发action
+    this.$store.dispatch("categoryList");
+  },
+};
 </script>
 
 <style>
-
 </style>

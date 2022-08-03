@@ -5,8 +5,12 @@
         <!--banner轮播-->
         <div class="swiper-container" id="mySwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="./images/banner1.jpg" />
+            <div
+              class="swiper-slide"
+              v-for="(carousel, index) in bannerList"
+              :key="carousel.id"
+            >
+              <img :src="carousel.imgUrl" />
             </div>
           </div>
           <!-- 如果需要分页器 -->
@@ -91,8 +95,47 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import Swiper from "swiper";
 export default {
-  name: 'ListContainer'
+  name: "ListContainer",
+  mounted() {
+    // 派发action：通知Vuex发起ajax请求，将数据存储在仓库中
+    this.$store.dispatch("getBannerList");
+  },
+  computed: {
+    ...mapState({
+      bannerList: (state) => state.home.bannerList,
+    }),
+  },
+  watch: {
+    // 对象写法和函数写法
+    // 监听bannerList数据的变化
+    bannerList: {
+      // 对象写法要有回调
+      handler() {
+        // 只能保证bannerList数据已经有了，没办法保证v-for已经执行结束
+        // watch + nextTick
+        this.$nextTick(() => {
+          var mySwiper = new Swiper(".swiper-container", {
+            loop: true, // 循环模式选项
+
+            // 如果需要分页器
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+            },
+
+            // 如果需要前进后退按钮
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+          });
+        });
+      },
+    },
+  },
 };
 </script>
 

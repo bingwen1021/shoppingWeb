@@ -8,6 +8,7 @@
     <Floor/>
     <Floor/>
     <Brand/>
+
   </div>
 </template>
 
@@ -18,6 +19,8 @@ import Rank from '@/pages/Home/Rank'
 import Like from '@/pages/Home/Like'
 import Floor from '@/pages/Home/Floor'
 import Brand from '@/pages/Home/Brand'
+
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Home',
@@ -28,7 +31,8 @@ export default {
     Like,
     Floor,
     Brand
-  }
+  },
+
 }
 </script>
 

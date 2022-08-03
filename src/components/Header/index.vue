@@ -38,7 +38,11 @@
             class="input-error input-xxlarge"
             v-model="keyword"
           />
-          <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">
+          <button
+            class="sui-btn btn-xlarge btn-danger"
+            type="button"
+            @click="goSearch"
+          >
             搜索
           </button>
         </form>
@@ -50,24 +54,26 @@
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Header',
-  data(){
-    return{
-      keyword:''
-    }
+  name: "Header",
+  data() {
+    return {
+      keyword: "",
+    };
   },
   methods: {
-    goSearch(){
+    goSearch() {
       // 路由传递参数
       // this.$router.push('/search/' + this.keyword)
-      this.$router.push({
-        name:'search',
-        params:{keyword:this.keyword},
-        query:{k:this.keyword.toUpperCase()}
-      })
-
-    }
-  }
+      if (this.$route.query) {
+        let location = {
+          name: "search",
+          params: { keyword: this.keyword || undefined },
+        };
+        location.query = this.$route.query;
+        this.$router.push(location);
+      }
+    },
+  },
 };
 </script>
 
