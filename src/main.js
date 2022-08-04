@@ -4,6 +4,8 @@ Vue.config.productionTip = false;
 // 三级联动组件---全局组件
 import TypeNav from "@/components/TypeNav";
 Vue.component(TypeNav.name, TypeNav);
+import Carousel from "@/components/Carousel";
+Vue.component(Carousel.name, Carousel);
 
 // 引入MockServe.js
 import "@/mock/mockServe";
